@@ -1,13 +1,17 @@
 import React from 'react'
 import styles from './Login.module.scss'
 import {Modal} from "../../components/Modal/Modal";
+import {FormRegister} from "../../components/Forms/FormRegister/FormRegister";
+import {FormLogin} from "../../components/Forms/FormLogin/FormLogin";
 
 
 export const Login:React.FC=():JSX.Element=>{
     const [open,setOpen] = React.useState<boolean>(false)
+    const [isLogin,setLogin] = React.useState<boolean>(false)
 
-    const onOpenModal=()=>{
-        setOpen(true)
+    const onOpenModal=(isLogin:boolean)=>()=>{
+        setOpen(!open)
+        setLogin(isLogin)
     }
 
     return(
@@ -18,14 +22,18 @@ export const Login:React.FC=():JSX.Element=>{
                         open={open}
                         setOpen={setOpen}
                     >
-                        <div>
-                            <h1>Начать</h1>
-                            <p>Нажимая войдите вы принимаете условия чего-то там</p>
-                            <div>
-                                <button>войти через github.com</button>
-                                <a href="">другие варианты</a>
-                            </div>
-                        </div>
+                                {isLogin ? (
+                                    <div className={styles.login}>
+                                        <h1>Авторизация</h1>
+                                        <FormLogin/>
+                                    </div>
+                                ):(
+                                    <div className={styles.register}>
+                                        <h1>Начать</h1>
+                                        <p>Нажимая войдите вы принимаете условия чего-то там</p>
+                                        <FormRegister/>
+                                    </div>
+                                )}
                     </Modal>
                 )
             }
@@ -41,7 +49,7 @@ export const Login:React.FC=():JSX.Element=>{
                     </g>
                 </svg>
                 <div className={styles.signIn}>
-                    <button className={styles.buttonSignIn} onClick={onOpenModal}>
+                    <button className={styles.buttonSignIn} onClick={onOpenModal(true)}>
                        <span>Войдите</span>
                     </button>
                 </div>
@@ -49,7 +57,7 @@ export const Login:React.FC=():JSX.Element=>{
            <div className={styles.main}>
                <h1>Свайп вправо</h1>
                <div className={styles.createAccount}>
-                   <button className={styles.buttonCreateAccount}>
+                   <button className={styles.buttonCreateAccount} onClick={onOpenModal(false)}>
                    <span className={styles.buttonText}>
                        Создать аккаунт
                    </span>

@@ -5,21 +5,24 @@ import styles from './Modal.module.scss'
 interface IModal {
     open:boolean,
     setOpen:React.Dispatch<React.SetStateAction<boolean>>,
-    children?:React.ReactChild
+    children?:React.ReactChild,
+    header?:boolean
 }
 
-export const Modal:React.FC<IModal>=({open,setOpen,children}):JSX.Element=>{
+export const Modal:React.FC<IModal>=({open,setOpen,children,header = false}):JSX.Element=>{
     const onClose=()=>{
         setOpen(false)
     }
     return (
         <div className={styles.modalMain} onClick={onClose}>
             <div className={styles.modalDialog} onClick={e=>e.stopPropagation()}>
-                <div className={styles.header}>
+                {header && (
+                    <div className={styles.header}>
                     <span>
                         &times;
                     </span>
-                </div>
+                    </div>
+                )}
                 <div className={styles.body}>
                     {children}
                 </div>

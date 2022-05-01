@@ -2,7 +2,7 @@
   position: relative;
   background: url('./main.webp') no-repeat center center;
   color:#ffffff;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   //box-shadow: inset 10px 10px 500px #000000;
   &:after{
@@ -85,4 +85,16 @@
     color: #d6002f;
     font-size: 20px;
   }
+}
+.login{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.register{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
