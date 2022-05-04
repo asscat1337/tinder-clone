@@ -1,4 +1,5 @@
 import {Request,Response,NextFunction} from "express";
+import {User} from "../Models/User";
 
 interface IAuth {
     login?:string;
@@ -24,6 +25,16 @@ class AuthController{
            return res.status(200).json(req.body)
         }catch (e) {
             return res.status(500).json(e)
+        }
+    }
+
+    async getAll(req:Request,res:Response,next:NextFunction){
+        try{
+            const data = await User.findAll()
+
+            console.log(data)
+        }catch (e) {
+            console.log(e)
         }
     }
 
